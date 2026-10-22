@@ -1,0 +1,51 @@
+# --- large or regenerable artifacts: do NOT commit ---
+data/frames/
+*.tar
+*.zip
+models/**/*.pt
+experiments/**/last.pt
+calibration/**/*.pt
+
+# --- python / notebooks ---
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# --- OS / editors ---
+.DS_Store
+.vscode/
+.idea/
+
+# Committed on purpose (small, needed for reproducibility):
+#   data/index.csv, data/index_meta.json, data/splits/*.csv, data/frame_meta.csv
+#   results/**/metrics.json, results/**/test_preds.npz, results/*.csv
+#   experiments/**/log.csv, configs/**/*.yaml
+
+
+
+# --- large or regenerable artifacts: do NOT commit ---
+data/frames/
+*.tar
+*.zip
+models/**/*.pt
+experiments/**/last.pt
+calibration/**/*.pt
+
+# --- python / notebooks ---
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# --- OS / editors ---
+.DS_Store
+.vscode/
+.idea/
+
+# Committed on purpose (small, needed for reproducibility):
+#   data/index.csv, data/index_meta.json, data/splits/*.csv, data/frame_meta.csv
+#   results/**/metrics.json, results/**/test_preds.npz, results/*.csv
+#   experiments/**/log.csv, configs/**/*.yaml

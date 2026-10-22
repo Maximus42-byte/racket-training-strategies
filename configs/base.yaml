@@ -1,0 +1,49 @@
+# Baseline configuration. Every generated config inherits from this file.
+# Approved 2026-10-10: squash frames, single hyperparameter set for all runs,
+# partial FT = final stage, MobileNetV3 feature d = 960.
+# train.lr is set from the group-L LR check (1e-4 / 3e-4 / 1e-3) before group A.
+
+data:
+  root: .                        # where data/ lives (on Colab: local copy, e.g. /content/repo)
+  index_csv: data/index.csv
+  index_meta: data/index_meta.json
+  split_csv: data/splits/session_split.csv   # group E uses data/splits/random_split.csv
+  frames_root: data/frames
+  num_frames: 8                  # T
+  n_cand: 3                      # candidate frames per segment stored on disk
+  spatial: squash                # squash | center_crop   (approved: squash)
+  num_workers: 4
+
+model:
+  backbone: mobilenet_v3_large   # mobilenet_v3_large | efficientnet_b0 | resnet18
+  pretrained: true
+  transfer: full                 # scratch | frozen | partial | full
+  head_dropout: 0.0
+  freeze_bn_in_frozen: true
+
+train:
+  resolution: 224                # 160 | 224
+  batch_size: 16                 # clips per batch (x8 frames)
+  lr: 3.0e-4                     # AdamW base LR; REPLACE with group-L winner
+  weight_decay: 0.05
+  max_epochs: 20
+  patience: 5                    # early stopping on val macro-F1
+  schedule: constant             # constant | cosine
+  warmup_epochs: 1               # cosine only
+  min_lr_ratio: 0.01             # cosine only: final LR = lr * ratio
+  loss: ce                       # ce | weighted_ce
+  amp: true
+  channels_last: true
+
+aug:
+  policy: none                   # none | generic | sport_aware
+  rrc_scale: [0.6, 1.0]          # RandomResizedCrop area range
+  rrc_ratio: [1.15, 1.55]        # width/height range around the 4:3 frame (squash mode)
+  color_jitter: [0.3, 0.3, 0.3, 0.02]   # brightness, contrast, saturation, hue
+  flip_p: 0.5                    # generic policy only
+
+run:
+  name: baseline
+  group: X
+  seeds: [0]
+  out_root: .                    # where experiments/ models/ results/ are written (Drive on Colab)

@@ -1,0 +1,7 @@
+# Tested target: Google Colab (Python 3.10+, CUDA). Versions are minimums.
+torch>=2.3          # torch.amp.GradScaler, torch.utils.flop_counter
+torchvision>=0.16   # transforms.v2 with tv_tensors.Video
+numpy>=1.24
+scikit-learn>=1.2
+opencv-python-headless>=4.8   # frame extraction only
+pyyaml>=6.0
