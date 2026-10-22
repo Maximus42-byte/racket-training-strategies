@@ -63,6 +63,11 @@ Then:
 3. Analysis: `python -m src.analyze summary`, `seeds`, `leakage`,
    `bootstrap --a A_<bb>_full_s0 --b C_<bb>_opt_s0`, `perclass --runs ...`.
 
+### Day 8 — figures and hand-off
+1. `python -m src.analyze perclass --runs A_<bb>_full_s0 C_<bb>_opt_s0 ...` (all three backbones)
+2. `python -m src.make_figures` → `figures/Fig2.pdf` … `Fig5.pdf`
+3. `python -m src.export_bundle` → `paper_bundle.zip` (results only; no checkpoints or frames)
+
 Interrupted runs resume from `experiments/<run_id>/last.pt`; finished runs are skipped.
 
 ## Notes for the paper
